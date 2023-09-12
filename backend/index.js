@@ -1,13 +1,25 @@
 const express = require('express');
+require("dotenv").config();
+const dbConnect = require('./DbConnect');
+
+
+const PORT = process.env.PORT;
 
 const app =express();
-
-const port =5000;
+app.use(express.json());
+dbConnect();
 
 app.get('/', (req,res)=>{
-    res.send('HelloWorld');
+    res.send('this is Home');
 })
 
-app.listen(port ,()=>{
-    console.log(`app listening to ${port}`);
+//Routes Below
+app.use("/api", require("./routes/SignUp"));
+
+
+
+
+app.listen(PORT ,()=>{
+    console.log(`app listening to ${PORT}`);
 })
+

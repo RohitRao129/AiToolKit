@@ -19,11 +19,8 @@ export default function Navbar() {
                         <li className="nav-item">
                             <Link className="nav-link" to='/audiogeneration'>Audio Generation</Link>
                         </li>
-                        <li className="nav-item ms-lg-auto me-lg-4">
-                            <Link className="nav-link" to='/savedgeneration'>Saved Generations</Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link className='nav-link active' to='/login'>Login/Signup</Link>
+                        <li className='nav-item ms-auto'>
+                            <Link className='nav-link active' to='/signup'>Login/Signup</Link>
                         </li>
                     </ul>
 

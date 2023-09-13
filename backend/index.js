@@ -14,7 +14,7 @@ app.get('/', (req,res)=>{
 })
 
 //Routes Below
-app.use("/api", require("./routes/SignUp"));
+app.use("/", require("./routes/SignUp"));
 
 
 

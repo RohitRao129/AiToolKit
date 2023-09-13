@@ -1,9 +1,10 @@
 import React,{useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
+
 
 export default function Login() {
-
-    const [credentials, setcredentials] = useState({email: "", password: ""});
+    let navigate =useNavigate();
+    const [credentials, setcredentials] = useState({username: "", password: ""});
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -13,7 +14,7 @@ export default function Login() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(
-                {email: credentials.email, password: credentials.password}
+                {username: credentials.username, password: credentials.password}
             )
         })
 
@@ -21,10 +22,11 @@ export default function Login() {
 
         console.log(jsonResponse);
 
-        if (jsonResponse.success != true) {
+        if (jsonResponse.success !== true) {
             alert("wrong credentials");
         } else {
             alert("Logged In");
+            navigate("/");
         }
     }
 
@@ -51,14 +53,13 @@ export default function Login() {
                 <form onSubmit={handleSubmit}>
 
                     <div className="col-md-10 mx-auto my-4">
-                        <input className="form-control px-3 py-2" type="email" name="email"
+                        <input className="form-control px-3 py-2" type="text" name="username"
                             value={
-                                credentials.email
+                                credentials.username
                             }
                             onChange={onChange}
-                            placeholder="E-mail Address"
+                            placeholder="Full Name"
                             required/>
-
                     </div>
 
                     <div className="col-md-10 mx-auto my-4">

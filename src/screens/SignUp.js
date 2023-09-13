@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 
 export default function SignUp() {
-
+    let navigate = useNavigate();
     const [credentials, setcredentials] = useState({username: "", email: "", password: "", confirmpassword: ""});
 
     const handleSubmit = async (e) => {
@@ -21,10 +21,11 @@ export default function SignUp() {
 
         console.log(jsonResponse);
 
-        if (jsonResponse.success != true) {
+        if (jsonResponse.success !== true) {
             alert("wrong credentials");
         } else {
             alert("account created");
+            navigate("/");
         }
     }
 

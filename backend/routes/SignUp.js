@@ -33,41 +33,4 @@ router.post("/signup",
     }
 })
 
-
-router.post("/login", 
-[
-    body("email").isEmail(),
-    body('password').isLength({min:6,max:24})
-],
-
-async (req,res)=>{
-
-    const validateerror = validationResult(req);
-
-    if (! validateerror.isEmpty()) {
-        return res.status(400).json({success:false,errors: validateerror.array()});
-    }
-
-    let email = req.body.email;
-    try{
-        let searchresult = await Account.findOne({email});
-
-        if(!searchresult){
-            return res.status(400).json({success:false,errors: "User not found!"});
-        }
-
-        if(req.body.password!==searchresult.password){
-            return res.status(400).json({success:false,errors: "Incorrect password!"});
-        }
-
-        return res.json({success:true,errors: "User Logged in!"});
-
-    }
-    catch(error){
-        console.log(error);
-        res.json({success : false});
-    }
-
-})
-
 module.exports = router;

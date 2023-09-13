@@ -24,6 +24,7 @@ app.get('/', (req,res)=>{
 
 //Routes Below
 app.use("/", require("./routes/SignUp"));
+app.use("/", require("./routes/Login"));
 
 
 

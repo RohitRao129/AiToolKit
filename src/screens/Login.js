@@ -1,15 +1,46 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {Link} from 'react-router-dom'
 
 export default function Login() {
-    
-    
-    
-    
-    
-    
+
+    const [credentials, setcredentials] = useState({email: "", password: ""});
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const response = await fetch("http://localhost:5000/login", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {email: credentials.email, password: credentials.password}
+            )
+        })
+
+        const jsonResponse = await response.json();
+
+        console.log(jsonResponse);
+
+        if (jsonResponse.success != true) {
+            alert("wrong credentials");
+        } else {
+            alert("Logged In");
+        }
+    }
+
+    const onChange = (event) => {
+        setcredentials({
+            ...credentials,
+            [event.target.name]: event.target.value
+        });
+    }
+
+
     return (<>
-        <div className='bg-dark text-light d-flex align-items-center 'style={{"height": "100vh"}}>
+        <div className='bg-dark text-light d-flex align-items-center '
+            style={
+                {"height": "100vh"}
+        }>
 
 
             <div className="col-xs-10 col-md-6 col-lg-4 border border-3 rounded-3 mx-auto">
@@ -17,28 +48,36 @@ export default function Login() {
                 <h3 className='text-center text-info my-5'>Login</h3>
 
 
-                <form className="requires-validation" novalidate>
+                <form onSubmit={handleSubmit}>
 
                     <div className="col-md-10 mx-auto my-4">
-                        <input className="form-control px-3 py-2" type="text" name="name" placeholder="Username/Email" required/>
-                        <div className="valid-feedback">Username field is valid!
-                        </div>
-                        <div className="invalid-feedback">Username field cannot be blank!
-                        </div>
+                        <input className="form-control px-3 py-2" type="email" name="email"
+                            value={
+                                credentials.email
+                            }
+                            onChange={onChange}
+                            placeholder="E-mail Address"
+                            required/>
+
                     </div>
 
                     <div className="col-md-10 mx-auto my-4">
-                        <input className="form-control px-3 py-2" type="password" name="password" placeholder="Password" required/>
-                        <div className="valid-feedback">Password field is valid!
-                        </div>
-                        <div className="invalid-feedback">Password field cannot be blank!
-                        </div>
+                        <input className="form-control px-3 py-2" type="password" name="password"
+                            value={
+                                credentials.password
+                            }
+                            onChange={onChange}
+                            placeholder="Password"
+                            required/>
+
                     </div>
 
 
                     <div className="col-md-10 mx-auto my-4 text-center">
-                        <p>New User? 
-                            <Link to="/signup"> Create Account </Link>
+                        <p>New User?
+                            <Link to="/signup">
+                                Create Account
+                            </Link>
                             here.</p>
                     </div>
 

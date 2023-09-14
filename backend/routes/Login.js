@@ -3,6 +3,8 @@ const router = express.Router();
 const Account = require("../models/Accounts");
 const {body, validationResult} = require('express-validator');
 const bcrypt = require("bcryptjs");
+const jwt =require("jsonwebtoken");
+require('dotenv').config();
 
 router.post("/login", 
     //---------Express validator--------------------
@@ -24,21 +26,27 @@ async (req,res)=>{
     try{
 
         let username = req.body.username;
-        let searchresult = await Account.findOne({username});
-        
-        console.log(searchresult);
+        let accountSearchResult = await Account.findOne({username});
 
-        if(!searchresult){
+        if(!accountSearchResult){
             return res.status(400).json({success:false,errors: "User not found!"});
         }
 
-        const passMatchResulet = await bcrypt.compare(req.body.password, searchresult.password);
+        const passMatchResulet = await bcrypt.compare(req.body.password, accountSearchResult.password);
 
         if(!passMatchResulet){
             return res.status(400).json({success:false,errors: "Incorrect password!"});
         }
 
-        return res.json({success:true,errors: "User Logged in!"});
+        const data = {
+            user:{
+                id: accountSearchResult.id
+            }
+        }
+
+        const authToken = jwt.sign(data,process.env.JWTSECRETKEY,{expiresIn:process.env.TOKENEXPIRETIME});
+
+        return res.json({success:true,authToken:authToken});
 
     }
     catch(error){

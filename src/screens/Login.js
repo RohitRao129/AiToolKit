@@ -25,7 +25,8 @@ export default function Login() {
         if (jsonResponse.success !== true) {
             alert("wrong credentials");
         } else {
-            alert("Logged In");
+            localStorage.setItem("authToken",jsonResponse.authToken);
+            alert(localStorage.getItem("authToken"));
             navigate("/");
         }
     }

@@ -3,6 +3,7 @@ const router = express.Router();
 const Account = require("../models/Accounts");
 const {body, validationResult} = require('express-validator');
 const bcrypt = require('bcryptjs');
+require('dotenv').config();
 
 
 router.post("/signup", 
@@ -28,13 +29,13 @@ router.post("/signup",
         let username = req.body.username;
         let email = req.body.email;
 
-        let searchresult = await Account.findOne({username});
-        if(searchresult){
+        let accountSearchResult = await Account.findOne({username});
+        if(accountSearchResult){
             return res.status(400).json({success:false,errors: "Username not awailable"});
         }
 
-        searchresult = await Account.findOne({email});
-        if(searchresult){
+        accountSearchResult = await Account.findOne({email});
+        if(accountSearchResult){
             return res.status(400).json({success:false,errors: "Email is already being used"});
         }
 

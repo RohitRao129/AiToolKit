@@ -1,14 +1,12 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import Card from '../components/Card'
 import { Link } from 'react-router-dom'
 
 export default function Home() {
     return (
         <>
-            <div data-bs-theme="dark" className='bg-dark h-100' >
-                <div><Navbar/></div>
+                <Navbar/>
                 
                 <div className='d-flex flex-wrap justify-content-evenly'>
                     
@@ -51,9 +49,8 @@ export default function Home() {
 
                 </div>
                 
-
-                <div><Footer/></div>
-            </div>
+                <div className='h-100 text -light'>dfsaf</div>
+                <Footer/>
 
         </>
     )

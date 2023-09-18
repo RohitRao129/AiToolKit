@@ -1,55 +1,63 @@
 import React from 'react'
-import NavbarTop from '../components/NavbarTop'
-import Footer from '../components/Footer'
-import { Link } from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
+import {FiGrid ,FiImage,FiHardDrive,FiMusic,FiArrowRight} from "react-icons/fi";
+import {TfiJsfiddle} from "react-icons/tfi";
+import {BsChatLeftDots} from "react-icons/bs";
+import NavbarSide from'../components/NavbarSide';
 
-export default function Home() {
+export default function HomeSidebar() {
+
     return (
         <>
-                <NavbarTop/>
-                
-                <div className='d-flex flex-wrap justify-content-evenly'>
+            <div className='d-flex 'style={{minHeight: "100vh"}}>
+
+                <NavbarSide/>
+                <div className='w-100 '>
+                    <div className='text-center my-5' >
+                        <h1 style={{fontWeight:"bold"}}>Explore The world of AI</h1>
+                        <p style={{color:"grey"}}>Chat with Ai - Make your ideas real</p>
+                    </div>
                     
-                    <div id='page1' className="card my-5 " style={{width: "18rem", boxShadow:"3px 3px 10px 1px rgba(0, 0, 0, 0.43)"}}>
-                        <img src="https://images.unsplash.com/photo-1679083216051-aa510a1a2c0e?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=MnwxfDB8MXxyYW5kb218MHx8Q2hhdEdwdHx8fHx8fDE2OTQ0NjA5OTk&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=800" className="card-img-top" alt="..."/>
-                        <div className="card-body pb-0 d-flex flex-column bg-dark text-light rounded-bottom">
-                            <h5 className="card-title text-center border py-1">Generate Text</h5>
-                            <p className="card-text">generate Text from text prompt.</p>
-                            <Link to="/textgeneration" className="btn btn-primary w-100 mt-auto mb-2">Take me there</Link>
+                    <Link className='col-lg-9 col-md-10 col-sm-10 col-0 mx-auto my-5 text-center d-flex ' style={{textDecoration:"none"}} to="/textgeneration">
+                        <div className='d-flex' >
+                            <BsChatLeftDots className='mx-3 mt-1' style={{color:"#443B85",fontSize:"32px"}}/>
+                            <p className='text-dark' style={{fontWeight:"600", fontSize:"20px"}}>Chat with AI</p>
                         </div>
-                    </div>
+                        <FiArrowRight className='ms-auto' style={{color:"#443B85",fontSize:"25px"}}></FiArrowRight>
+                    </Link>
 
-                    <div id='page1' className="card my-5" style={{width: "18rem", boxShadow:"3px 3px 10px 1px rgba(0, 0, 0, 0.43)"}}>
-                        <img src="https://images.unsplash.com/photo-1642427749670-f20e2e76ed8c?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=MnwxfDB8MXxyYW5kb218MHx8TWlkam91cm5leXx8fHx8fDE2OTQ0NjEwNDY&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=800" className="card-img-top" alt="..."/>
-                        <div className="card-body pb-0 d-flex flex-column bg-dark text-light rounded-bottom">
-                            <h5 className="card-title text-center border py-1">Generate Image</h5>
-                            <p className="card-text">generate audio from Image prompt.</p>
-                            <Link to="/imagegeneration" className="btn btn-primary w-100 mt-auto mb-2">Take me there</Link>
+                    <Link className='col-lg-9 col-md-10 col-sm-10 col-0 mx-auto my-5 text-center d-flex ' style={{textDecoration:"none"}} to="/imagegeneration">
+                        <div className='d-flex' >
+                            <FiImage className='mx-3 mt-1' style={{color:"#813628",fontSize:"32px"}}/>
+                            <p className='text-dark' style={{fontWeight:"600", fontSize:"20px"}}>Make Images</p>
                         </div>
-                    </div>
+                        <FiArrowRight className='ms-auto' style={{color:"#813628",fontSize:"25px"}}></FiArrowRight>
+                    </Link>
 
-                    <div id='page1' className="card my-5" style={{width: "18rem", boxShadow:"3px 3px 10px 1px rgba(0, 0, 0, 0.43)"}}>
-                        <img src="https://images.unsplash.com/photo-1525022340574-113732565927?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=MnwxfDB8MXxyYW5kb218MHx8QXVkaW98fHx8fHwxNjk0NDYxMTg1&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=800" className="card-img-top" alt="..."/>
-                        <div className="card-body pb-0 d-flex flex-column bg-dark text-light rounded-bottom">
-                            <h5 className="card-title text-center border py-1">Generate Audio</h5>
-                            <p className="card-text">generate audio from text prompt.</p>
-                            <Link to="/audiogeneration" className="btn btn-primary w-100 mt-auto mb-2">Take me there</Link>
+                    <Link className='col-lg-9 col-md-10 col-sm-10 col-0 mx-auto my-5 text-center d-flex ' style={{textDecoration:"none"}} to="/audiogeneration">
+                        <div className='d-flex' >
+                            <FiMusic className='mx-3 mt-1' style={{color:"#27645C",fontSize:"32px"}}/>
+                            <p className='text-dark' style={{fontWeight:"500", fontSize:"20px"}}>Make Music</p>
                         </div>
-                    </div>
+                        <FiArrowRight className='ms-auto' style={{color:"#27645C",fontSize:"25px"}}></FiArrowRight>
+                    </Link>
 
-                    <div id='page1' className="card my-5" style={{width: "18rem", boxShadow:"3px 3px 10px 1px rgba(0, 0, 0, 0.43)"}}>
-                        <img src="https://images.unsplash.com/photo-1470790376778-a9fbc86d70e2?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=MnwxfDB8MXxyYW5kb218MHx8Ym9va3x8fHx8fDE2OTQ0NjEzMTg&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=800" className="card-img-top" alt="..."/>
-                        <div className="card-body pb-0 d-flex flex-column bg-dark text-light rounded-bottom">
-                            <h5 className="card-title text-center border py-1">Saved</h5>
-                            <p className="card-text">Browse your saved generations with their respective prompt.</p>
-                            <Link to="/savedgenerations" className="btn btn-primary w-100 mt-auto mb-2">Go to Saved</Link>
-                        </div>
-                    </div>
+                    {(localStorage.getItem("authToken"))?
+                            <Link id="savedGenButton" className='col-lg-9 col-md-10 col-sm-10 col-0 mx-auto my-5 text-center d-flex ' style={{textDecoration:"none"}} to="/account">
+                                <div className='d-flex' >
+                                    <FiHardDrive className='mx-3 mt-1' style={{color:"gray",fontSize:"32px"}}/>
+                                    <p className='text-dark' style={{fontWeight:"550", fontSize:"20px"}}>Saved Generations</p>
+                                </div>
+                                <FiArrowRight className='ms-auto' style={{color:"gray",fontSize:"25px"}}></FiArrowRight>
+                            </Link>
 
+                    : ""}
 
+    
                 </div>
-                
-                <Footer/>
+
+            </div>
+
 
         </>
     )

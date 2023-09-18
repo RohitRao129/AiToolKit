@@ -20,14 +20,40 @@ export default function Login() {
 
         const jsonResponse = await response.json();
 
-        console.log(jsonResponse);
-
+        //console.log(jsonResponse);
+        
         if (jsonResponse.success !== true) {
-            alert("wrong credentials");
+            if(jsonResponse.code===1){
+                document.getElementById("usernamemsg").innerHTML="Wrong Username";
+            }
+            else{
+                document.getElementById("usernamemsg").innerHTML="";
+            }
+
+            if(jsonResponse.code===2){
+                document.getElementById("passwordmsg").innerHTML="Wrong Password";
+            }
+            else{
+                document.getElementById("passwordmsg").innerHTML="";
+            }
+
+            if(jsonResponse.code===0){
+                document.getElementById("forgotpasswordmsg").innerHTML="Invalid inputs";
+            }
+
+            if(jsonResponse.code >0){
+                document.getElementById("forgotpasswordmsg").innerHTML="<a style='text-decoration: none;' href='/changepassword'>Forgot Password?</a>";
+            }
+
+           
         } else {
             localStorage.setItem("authToken",jsonResponse.authToken);
-            alert(localStorage.getItem("authToken"));
-            navigate("/");
+            document.getElementsByTagName('form')[0].innerHTML="";
+            document.getElementById('head').innerHTML="Loging In";
+            setTimeout(() => {
+                navigate("/");
+            }, 750);
+            
         }
     }
 
@@ -40,19 +66,19 @@ export default function Login() {
 
 
     return (<>
-        <div className='bg-dark text-light d-flex align-items-center '
+        <div className='d-flex align-items-center '
             style={
-                {"height": "100vh"}
+                {"height": "100vh", background:"#cececec2"}
         }>
 
 
-            <div className="col-xs-10 col-md-6 col-lg-4 border border-3 rounded-3 mx-auto">
+            <div className="col-xs-10 col-md-6 col-lg-4 shadow p-3 mb-5 bg-white rounded-3 mx-auto">
 
-                <h3 className='text-center text-info my-5'>Login</h3>
+                <h3 id="head" className='text-center text-info my-5'>Login</h3>
 
 
                 <form onSubmit={handleSubmit}>
-
+                    
                     <div className="col-md-10 mx-auto my-4">
                         <input className="form-control px-3 py-2" type="text" name="username"
                             value={
@@ -61,26 +87,18 @@ export default function Login() {
                             onChange={onChange}
                             placeholder="Full Name"
                             required/>
+                        <p id="usernamemsg" className='m-1 text-danger'></p>
                     </div>
 
                     <div className="col-md-10 mx-auto my-4">
-                        <input className="form-control px-3 py-2" type="password" name="password"
-                            value={
-                                credentials.password
-                            }
-                            onChange={onChange}
-                            placeholder="Password"
-                            required/>
-
+                        <input className="form-control px-3 py-2" type="password" name="password" value={credentials.password} onChange={onChange} placeholder="Password" required/>
+                        <p id="passwordmsg" className='m-1 text-danger'></p>
                     </div>
 
-
+                    
                     <div className="col-md-10 mx-auto my-4 text-center">
-                        <p>New User?
-                            <Link to="/signup">
-                                Create Account
-                            </Link>
-                            here.</p>
+                        <p id="forgotpasswordmsg" className='text-danger' ></p>
+                        <p>New User? <Link to="/signup" style={{textDecoration:"none"}}>Create Account</Link> here.</p>
                     </div>
 
                     <div className="form-button my-4 text-center">

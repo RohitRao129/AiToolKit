@@ -21,7 +21,7 @@ router.post("/signup",
         const validateerror = validationResult(req);
 
         if (! validateerror.isEmpty()) {
-            return res.status(400).json({errors: validateerror.array()});
+            return res.status(400).json({success:false, errors: validateerror.array(),code:0});
         }
 
         //-------------checking if creds are awilable-------------
@@ -31,12 +31,12 @@ router.post("/signup",
 
         let accountSearchResult = await Account.findOne({username});
         if(accountSearchResult){
-            return res.status(400).json({success:false,errors: "Username not awailable"});
+            return res.status(400).json({success:false,errors: "Username not awailable",code:1});
         }
 
         accountSearchResult = await Account.findOne({email});
         if(accountSearchResult){
-            return res.status(400).json({success:false,errors: "Email is already being used"});
+            return res.status(400).json({success:false,errors: "Email is already being used",code:2});
         }
 
         //----------Hashing the password using bcryptjs-------------------------------------

@@ -18,7 +18,7 @@ async (req,res)=>{
     const validateerror = validationResult(req);
 
     if (! validateerror.isEmpty()) {
-        return res.status(400).json({success:false,errors: validateerror.array()});
+        return res.status(400).json({success:false,errors: validateerror.array(),code:0});
     }
 
 
@@ -29,13 +29,13 @@ async (req,res)=>{
         let accountSearchResult = await Account.findOne({username});
 
         if(!accountSearchResult){
-            return res.status(400).json({success:false,errors: "User not found!"});
+            return res.status(400).json({success:false,errors: "User not found!",code:1});
         }
 
         const passMatchResulet = await bcrypt.compare(req.body.password, accountSearchResult.password);
 
         if(!passMatchResulet){
-            return res.status(400).json({success:false,errors: "Incorrect password!"});
+            return res.status(400).json({success:false,errors: "Incorrect password!",code:2});
         }
 
         const data = {

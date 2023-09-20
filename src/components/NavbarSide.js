@@ -30,7 +30,7 @@ export default function Navbar() {
                     
                     <div className='p-2  d-flex rounded my-3 mx-2' style={{backgroundColor:"rgba(255, 255, 255, 0.075)"}}>
                         <FiGrid className='mx-3' style={{color:"aqua",fontSize:"25px"}}/>
-                        <Link className='nav-link text-light' to="">Home</Link>
+                        <Link className='nav-link text-light' to="/">Home</Link>
                     </div>
 
                     <div className='p-2  d-flex roundedmy-3 mx-2' >

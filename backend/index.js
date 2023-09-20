@@ -25,6 +25,8 @@ app.get('/', (req,res)=>{
 //Routes Below
 app.use("/", require("./routes/SignUp"));
 app.use("/", require("./routes/Login"));
+app.use("/", require("./routes/SendOtp"));
+app.use("/", require("./routes/ChangePassword"));
 
 
 

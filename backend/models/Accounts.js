@@ -9,7 +9,7 @@ const AccountSchema = new Schema({
     chatgptapi :{type:String},
     dalleapi :{type:String},
     jukeboxapi :{type:String},
-    level : {type:Number,default:0}
+    otp : {type:String}
 });
 
 module.exports = mongoose.model('account', AccountSchema);

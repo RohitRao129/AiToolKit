@@ -15,7 +15,7 @@ export default function Navbar() {
 
     return (
         <>
-            <navbar className="col-lg-2 col-sm-5 col-12"style={{minHeight: "100vh",backgroundColor:"#121624"}}>
+            <div className="col-lg-2 col-sm-5 col-12"style={{minHeight: "100vh",backgroundColor:"#121624"}}>
                     
                     <div className='my-4 text-light text-center d-flex'>
                         <svg width="0" height="0">
@@ -28,12 +28,13 @@ export default function Navbar() {
                         <div className='mt-1' style={{fontSize:"26px",fontWeight:"bold",background:"linear-gradient(#f492f0, #a18dce)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>AiToolKit</div>
                     </div>
                     
-                    <div className='p-2  d-flex rounded my-3 mx-2' style={{backgroundColor:"rgba(255, 255, 255, 0.075)"}}>
+                    
+                    <div className='p-2  d-flex rounded my-3 mx-2'>
                         <FiGrid className='mx-3' style={{color:"aqua",fontSize:"25px"}}/>
                         <Link className='nav-link text-light' to="/">Home</Link>
                     </div>
 
-                    <div className='p-2  d-flex roundedmy-3 mx-2' >
+                    <div className='p-2  d-flex rounded my-3 mx-2' >
                         <BsChatLeftDots className='mx-3' style={{color:"#443B85",fontSize:"25px"}}/>
                         <Link className='nav-link text-light' to="/textgeneration">ChatGPT</Link>
                     </div>
@@ -57,7 +58,7 @@ export default function Navbar() {
                             <Link className='nav-link text-light'><span onClick={logoutUser}>Logout</span></Link>}
                     </div>
                     
-            </navbar>
+            </div>
         </>
     )
 }

@@ -1,43 +1,46 @@
 import React from 'react'
-import {Link,useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import {FiGrid, FiImage, FiHardDrive, FiMusic} from "react-icons/fi";
+import {TfiJsfiddle} from "react-icons/tfi";
+import {BsChatLeftDots} from "react-icons/bs";
 
 export default function Navbar() {
-    let navigate =useNavigate();
-    const  logoutUser =() =>{
+
+    let navigate = useNavigate();
+    const logoutUser = async () => {
         localStorage.removeItem("authToken");
         navigate("/");
     }
 
-
     return (
         <>
-            <nav  className="p-2 navbar-expand-lg bg-secondary ">
-                <div className="container-fluid w-100">
-                    <ul className="navbar-nav w-100 d-flex text-light">
-                        <li className="nav-item ">
-                            <Link className="nav-link active px-3" to="/">Home</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link px-3" to="/textgeneration">Text Generation</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link px-3" to='/imagegeneration'>Image Generation</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link px-3" to='/audiogeneration'>Audio Generation</Link>
-                        </li>
-                        <li className='nav-item ms-auto'>
-                        {(!localStorage.getItem("authToken"))?
-                            <Link className='nav-link active' to='/signup'>Login/Signup</Link>
-
-                            : 
-                            <button type="button" onClick={logoutUser} class="btn btn-success">Logout</button>}
-                        </li>
-                    </ul>
-
+            <div className="w-100 px-3 py-2 d-flex flex-wrap border-bottom border-2">
+                <div className='my-1 mx-2'>
+                    <Link className='nav-link' to='/'>Home</Link>
                 </div>
-            </nav>
 
+                <div className='d-none d-sm-flex'>
+                    <div className='col-sm-0 my-1 mx-2'>
+                        <Link className='nav-link' to="/textgeneration">ChatNow</Link>
+                    </div>
+                    <div className='col-lg-0 my-1 mx-2'>
+                        <Link className='nav-link' to="/imagegeneration">DrawNow</Link>
+                    </div>
+                    <div className='col-0 my-1 mx-2'>
+                        <Link className='nav-link' to="/audiogeneration">ComposeSongs</Link>
+                    </div>
+                </div>
+
+
+                <div className='my-1 ms-auto'>
+                    {
+                    (!localStorage.getItem("authToken")) ? <Link className='nav-link' to='/login'>Login/Signup</Link> : <Link className='nav-link'>
+                        <span onClick={logoutUser}>Logout</span>
+                    </Link>
+                } </div>
+
+
+            </div>
         </>
     )
 }

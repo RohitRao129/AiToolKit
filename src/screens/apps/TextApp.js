@@ -66,6 +66,7 @@ const TextApp = () => {
             const jsonResponse = await response.json();
 
         }catch(err){
+            //console.log(err)
         }
 
     }

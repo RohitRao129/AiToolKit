@@ -1,8 +1,5 @@
 import React from 'react'
 import {Link, useNavigate} from 'react-router-dom'
-import {FiGrid, FiImage, FiHardDrive, FiMusic} from "react-icons/fi";
-import {TfiJsfiddle} from "react-icons/tfi";
-import {BsChatLeftDots} from "react-icons/bs";
 
 export default function Navbar() {
 

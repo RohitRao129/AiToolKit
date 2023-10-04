@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Account = require("../models/Accounts");
+const Account = require("../../models/Accounts");
 const {body, validationResult} = require('express-validator');
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
@@ -50,7 +50,7 @@ router.post("/signup",
         res.json({success: true, message: "New account created successfully."})
 
     } catch (error) {
-        console.log(`error: ${error}`);
+        //console.log(`error: ${error}`);
         res.json({success: false, message: "Some error occured."})
     }
 })

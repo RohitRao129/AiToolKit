@@ -1,13 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const Account = require("../models/Accounts");
-const jwt = require("jsonwebtoken");
 require('dotenv').config();
 const {DiscussServiceClient} = require("@google-ai/generativelanguage");
 const {GoogleAuth} = require("google-auth-library");
 const {body} = require("express-validator");
 
-router.post("/getchat", async (req, res) => {
+router.post("/chatrequest", async (req, res) => {
 
     try {
         const MODEL_NAME = "models/chat-bison-001";

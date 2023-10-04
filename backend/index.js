@@ -23,11 +23,15 @@ app.get('/', (req,res)=>{
 })
 
 //Routes Below
-app.use("/", require("./routes/SignUp"));
-app.use("/", require("./routes/Login"));
-app.use("/", require("./routes/SendOtp"));
-app.use("/", require("./routes/ChangePassword"));
-app.use("/", require("./routes/GetChat"));
+app.use("/", require("./routes/authentication/SignUp"));
+app.use("/", require("./routes/authentication/Login"));
+app.use("/", require("./routes/authentication/SendOtp"));
+app.use("/", require("./routes/authentication/ChangePassword"));
+
+app.use("/", require("./routes/chatApp/chatRequest"));
+app.use("/", require("./routes/chatApp/FetchAllChats"));
+app.use("/", require("./routes/chatApp/StartOrSaveChat"));
+app.use("/", require("./routes/chatApp/LoadChat"));
 
 
 

@@ -20,7 +20,7 @@ code {
 
 
 .chat{
-  margin:15px;padding:5px 15px; border-radius: 0px 15px 15px 15px;width:fit-content;font-size: 18px;font-weight: 400;
+  margin:15px 2px 15px 10px;padding:5px 30px 5px 15px; border-radius: 0px 15px 15px 15px;width:fit-content;font-size: 18px;font-weight: 400;
   white-space: pre-wrap;
 }
 
@@ -33,6 +33,12 @@ code {
   display: none;
 }
 
+@media only screen and (max-width: 572px) {
+  .chat {
+    margin:15px 2px 15px 10px;padding:5px 15px 5px 15px; border-radius: 0px 15px 15px 15px;width:fit-content;font-size: 13px;font-weight: 400;
+    white-space: pre-wrap;
+  }
+}
 
 
 

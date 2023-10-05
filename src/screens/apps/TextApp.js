@@ -3,10 +3,11 @@ import {useNavigate} from 'react-router-dom'
 import NavbarTop from "../../components/NavbarTop.js";
 import {LuSendHorizonal,LuClipboard} from "react-icons/lu";
 import {RiDeleteBin6Line} from "react-icons/ri";
-import {FcCheckmark} from "react-icons/fc";
+import PulseLoader from "react-spinners/PulseLoader";
 
 const TextApp = () => {
     const [userInput, setUserInput] = useState("");
+    const [formEnabled,setFormEnabled] =useState(true);
     const [messages ,setMessages] = useState([]);
     const [previousChats ,setPreviousChats] = useState([{}]);
 
@@ -132,7 +133,7 @@ const TextApp = () => {
 
     const deleteChat =async(e) =>{
         if (!localStorage.getItem("authToken")) {navigate("/login")}
-
+        
         try{
             const response = await fetch("http://localhost:5000/deletechat", {
                 method: 'POST',
@@ -155,19 +156,23 @@ const TextApp = () => {
         }catch(err){
             console.log(err)
         }
+        
     }
 
     //dont expand
     const handleSubmit =async (e) =>{
         e.preventDefault();
+        setFormEnabled(false);
+
         if (!localStorage.getItem("authToken")) {navigate("/login")}
 
         try{
-            getResultRequest(e);
+           await getResultRequest(e);
         }catch(err){
             //console.log(err)*
         }
-        
+
+        setFormEnabled(true);
     }
 
     const AlwaysScrollToBottom = () => {
@@ -210,7 +215,7 @@ const TextApp = () => {
                                         if(msg.sender==="AI"){
                                             return (<div className="chat position-relative w-auto" style={{backgroundColor:"#CED3DC"}}> 
                                                 <div>{msg.text}</div> 
-                                                <button onClick={() => {navigator.clipboard.writeText(msg.text)}} className="copy position-absolute top-0 end-0 m-1 bg-transparent border-0" >
+                                                <button onClick={() => {navigator.clipboard.writeText(msg.text)}} className="copy position-absolute top-0 end-0  bg-transparent border-0" >
                                                 <LuClipboard/>
                                                 </button>
                                                 </div>
@@ -218,12 +223,15 @@ const TextApp = () => {
                                         }
                                         return (<div className="chat w-auto" style={{backgroundColor:"#e6fff3"}}>{msg.text} </div>);
                                 })}
+
+                                {!formEnabled? <div className="chat position-relative w-auto my-0" style={{backgroundColor:"#CED3DC"}}><PulseLoader color="grey" size={8} /></div>   : null}
+                                <AlwaysScrollToBottom/>
                 
                             </div>
 
-                            <form id="chatInput" className=" my-2 mx-md-3 mx-1 w-100 "
+                            <form id="chatInput" className=" mt-2 mb-1 mx-md-3 mx-1 w-100 "
                                 onSubmit={handleSubmit}>
-                                    <fieldset >
+                                    <fieldset disabled={!formEnabled}>
                                         <input className="col-md-10 col-9 p-1 ps-3 " placeholder="Start Chatting Here" type="text"value={userInput}onChange={(e) => setUserInput(e.target.value)}/>
                                         <button className="py-1 px-2 px-md-3 mx-1 rounded"style={{fontSize: "16px"}}type="submit"><LuSendHorizonal/></button>
                                     </fieldset>
@@ -236,7 +244,7 @@ const TextApp = () => {
                             return(
                                 <div className="my-2 mx-2 rounded-2 py-1 text-center border border-1 text-light d-flex" style={{backgroundColor: currentChatId===chat.id? "#27645C":"#212529"}} >
                                     <button type="button"  onClick={(e)=>{loadChat(previousChats.indexOf(chat))}} className="ms-2 bg-transparent py-1 border border-0 text-light" >{chat.tittle}</button>
-                                    <button type="button"  onClick={(e)=>{deleteChat(previousChats.indexOf(chat))}}  className="ms-auto bg-transparent me-1 border border-0 text-light" ><RiDeleteBin6Line/></button>
+                                    <button type="button"  onClick={(e)=>{deleteChat(previousChats.indexOf(chat))}}  className="ms-auto bg-transparent me-1 border border-0 text-light" > <RiDeleteBin6Line/></button>
                                 </div>
                             )
                         })}

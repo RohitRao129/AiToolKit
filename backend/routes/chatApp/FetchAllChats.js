@@ -16,7 +16,7 @@ router.post("/fetchallchats", async (req, res) => {
         let chatIds =[];
 
         fetchedChats.map(chat =>{
-            chatIds.push(chat._id);
+            chatIds.push({id:chat._id,tittle :chat.tittle});
         })
 
         return res.json({success: true, chatIds});

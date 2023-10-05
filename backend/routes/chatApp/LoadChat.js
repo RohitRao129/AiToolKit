@@ -9,10 +9,17 @@ router.post("/loadchat", async (req,res)=>{
     try{
 
         let chatId = req.body.chatId;
-        let loadedchat = await Chat.findOne({chatId});
-        
+        let loadedchat = await Chat.findOne({_id:chatId});
 
-        return res.json({success:true,loadedchat:loadedchat});
+        let messages =[];
+
+        loadedchat.messages.map(msg =>{
+            messages.push({sender : msg.sender,text:msg.text});
+        })
+
+        //console.log(messages);
+
+        return res.json({success:true,messages:messages});
 
     }
     catch(error){

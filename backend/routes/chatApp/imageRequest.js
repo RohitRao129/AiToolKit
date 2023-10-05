@@ -6,7 +6,7 @@ const {GoogleAuth} = require("google-auth-library");
 const {body} = require("express-validator");
 
 
-router.post("/chatrequest", async (req, res) => {
+router.post("/imagerequest", async (req, res) => {
 
     try {
         const MODEL_NAME = "models/chat-bison-001";

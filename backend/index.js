@@ -32,6 +32,7 @@ app.use("/", require("./routes/chatApp/chatRequest"));
 app.use("/", require("./routes/chatApp/FetchAllChats"));
 app.use("/", require("./routes/chatApp/StartOrSaveChat"));
 app.use("/", require("./routes/chatApp/LoadChat"));
+app.use("/", require("./routes/chatApp/DeleteChat"));
 
 
 

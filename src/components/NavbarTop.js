@@ -5,8 +5,8 @@ export default function Navbar() {
 
     let navigate = useNavigate();
     const logoutUser = async () => {
-        localStorage.removeItem("authToken");
-        navigate("/");
+        await localStorage.removeItem("authToken");
+        navigate("/login");
     }
 
     return (

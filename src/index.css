@@ -24,6 +24,15 @@ code {
   white-space: pre-wrap;
 }
 
+.copy:active{
+  color: green;
+}
+
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 
 
 

@@ -51,7 +51,7 @@ const TextApp = () => {
         if (!localStorage.getItem("authToken")) {navigate("/login")}
         
         try{
-
+            
             setTittle(tittle);
             const response = await fetch("http://localhost:5000/startorsavechat", {
                 method: 'POST',
@@ -177,7 +177,7 @@ const TextApp = () => {
 
     const AlwaysScrollToBottom = () => {
         const elementRef = useRef();
-        useEffect(() => {elementRef.current.scrollIntoView()},[messages]);
+        useEffect(() => {elementRef.current.scrollIntoView()},[]);
         return <div ref={elementRef} />;
       };
 
@@ -188,9 +188,9 @@ const TextApp = () => {
             <div className=" boundery-box d-flex flex-column h-100">
                 <NavbarTop/>
 
-                <div className="d-flex w-100 flex-column flex-sm-row flex-fill" style={{height:"91%"}}>
+                <div className="d-flex w-100 flex-column flex-sm-row-reverse flex-fill" style={{height:"91%"}}>
                     
-                    <div className="d-flex flex-column col-11 col-sm-8 my-3 mx-auto rounded-4 border border-2" style={{height:"87vh"}} >
+                    <div className="d-flex flex-column col-11 col-sm-8 my-auto mx-auto rounded-3 border border-2" style={{height:"80vh"}} >
                             <div className="text-center position-relative ">
                                 <svg width="0" height="0">
                                     <linearGradient id="blue-gradient" x1="100%" y1="100%" x2="0%" y2="0%">
@@ -199,25 +199,18 @@ const TextApp = () => {
                                     </linearGradient>
                                 </svg>
                                 <div className="mx-auto" style={{fontSize: "32px",fontWeight: "bold",background: "linear-gradient(#f492f0, #a18dce)",WebkitBackgroundClip: "text",WebkitTextFillColor: "transparent"}}>Chat with Bard</div>
-                                <div className="position-absolute top-0 end-0 d-flex flex-column">
-                                    <form>
-                                        
-                                        { currentChatId===""? <input className="w-50" value={tittle} onChange={(e)=>{setTittle(e.target.value)}} type="text" placeholder="save as"></input>:<button onClick={(e)=>{setCurrentChatId("");setMessages([]);}} className="border m-2 border-0 rounded-2 bg-success text-light " >New Chat</button>}
-                                        <button onClick={saveOrUpdateChat} className="border m-2 border-0 rounded-2 bg-success text-light " >{currentChatId==="" ? "Save" :"Update"}</button>
-                                        <div id="saveInfo" className={ wasSaved ? "text-primary" :"text-danger"} >{saveInfo}</div>
-                                    </form>
-                                </div>
                             </div>
 
                             <div className="h-75 overflow-auto">
                             
                                 {messages.map(msg=>{
                                         if(msg.sender==="AI"){
-                                            return (<div className="chat position-relative w-auto" style={{backgroundColor:"#CED3DC"}}> 
-                                                <div>{msg.text}</div> 
-                                                <button onClick={() => {navigator.clipboard.writeText(msg.text)}} className="copy position-absolute top-0 end-0  bg-transparent border-0" >
-                                                <LuClipboard/>
-                                                </button>
+                                            return (
+                                                <div className="chat" style={{backgroundColor:"#CED3DC"}}> 
+                                                    <div className="text">{msg.text}</div> 
+                                                    <button onClick={() => {navigator.clipboard.writeText(msg.text)}} className="copy position-absolute top-0 end-0  bg-transparent border-0" >
+                                                    <LuClipboard/>
+                                                    </button>
                                                 </div>
                                             );
                                         }
@@ -229,21 +222,28 @@ const TextApp = () => {
                 
                             </div>
 
-                            <form id="chatInput" className=" mt-2 mb-1 mx-md-3 mx-1 w-100 "
+                            <form id="chatInput" className="my-2 ms-4 w-100 "
                                 onSubmit={handleSubmit}>
                                     <fieldset disabled={!formEnabled}>
-                                        <input className="col-md-10 col-9 p-1 ps-3 " placeholder="Start Chatting Here" type="text"value={userInput}onChange={(e) => setUserInput(e.target.value)}/>
+                                        <input className="col-md-10 col-9 p-1 ps-3 rounded border-secondary shadow" placeholder="Start Chatting Here" type="text"value={userInput}onChange={(e) => setUserInput(e.target.value)}/>
                                         <button className="py-1 px-2 px-md-3 mx-1 rounded"style={{fontSize: "16px"}}type="submit"><LuSendHorizonal/></button>
                                     </fieldset>
                                 
                             </form>
                     </div>
                     
-                    <div className="bg-dark mx-auto mx-sm-0 col-11 col-sm-3 d-flex flex-column text-light vh-100 overflow-auto">
+                    <div className="bg-dark mx-auto mx-sm-0 col-11 col-sm-3 d-flex flex-column text-light overflow-auto" style={{height:"93vh"}}>
+                        
+                        <div className="my-2 text-light d-flex w-100 flex-row flex-sm-column flex-md-row">
+                            { currentChatId===""? <input className="ms-2 rounded" value={tittle} onChange={(e)=>{setTittle(e.target.value)}} type="text" placeholder="save as"></input>:<button type="button" onClick={(e)=>{setCurrentChatId("");setMessages([]);setTittle("")}} className="ms-2 bg-transparent py-1 border rounded text-light" >New Chat</button>}
+                            <button onClick={saveOrUpdateChat} className="ms-auto me-2 bg-transparent py-1 border rounded text-light" >{currentChatId==="" ? "Save" :"Update"}</button>
+                            <div className={saveInfo ? "text-success mt-1":"text-danger mt-1"}> {saveInfo}</div>
+                        </div>
+                        
                         {previousChats.map(chat =>{
                             return(
                                 <div className="my-2 mx-2 rounded-2 py-1 text-center border border-1 text-light d-flex" style={{backgroundColor: currentChatId===chat.id? "#27645C":"#212529"}} >
-                                    <button type="button"  onClick={(e)=>{loadChat(previousChats.indexOf(chat))}} className="ms-2 bg-transparent py-1 border border-0 text-light" >{chat.tittle}</button>
+                                    <button type="button"  onClick={(e)=>{loadChat(previousChats.indexOf(chat))}} className="ms-2 bg-transparent py-1 border border-0 text-light overflow-hidden" >{chat.tittle}</button>
                                     <button type="button"  onClick={(e)=>{deleteChat(previousChats.indexOf(chat))}}  className="ms-auto bg-transparent me-1 border border-0 text-light" > <RiDeleteBin6Line/></button>
                                 </div>
                             )

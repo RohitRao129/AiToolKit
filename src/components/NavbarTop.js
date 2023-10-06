@@ -11,7 +11,7 @@ export default function Navbar() {
 
     return (
         <>
-            <div className="w-100 px-3 py-2 d-flex flex-wrap border-bottom border-2">
+            <div className="w-100 px-3 py-2 d-flex flex-wrap border-bottom border-2" style={{height:"7vh"}}>
                 <div className='my-1 mx-2'>
                     <Link className='nav-link' to='/'>Home</Link>
                 </div>

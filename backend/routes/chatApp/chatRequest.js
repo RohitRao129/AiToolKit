@@ -3,14 +3,13 @@ const router = express.Router();
 require('dotenv').config();
 const {DiscussServiceClient} = require("@google-ai/generativelanguage");
 const {GoogleAuth} = require("google-auth-library");
-const {body} = require("express-validator");
 
 
 router.post("/chatrequest", async (req, res) => {
 
     try {
         const MODEL_NAME = "models/chat-bison-001";
-        const API_KEY = process.env.API_KEY;
+        const API_KEY = process.env.BARD_API_KEY;
 
         const client = new DiscussServiceClient({authClient: new GoogleAuth().fromAPIKey(API_KEY)});
 

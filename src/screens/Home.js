@@ -41,7 +41,7 @@ export default function HomeSidebar() {
                         <FiArrowRight className='ms-auto' style={{color:"#27645C",fontSize:"25px"}}></FiArrowRight>
                     </Link>
 
-                    {(localStorage.getItem("authToken"))?
+                    {(localStorage.getItem("nothing"))?
                             <Link id="savedGenButton" className='col-lg-9 col-md-10 col-sm-10 col-0 mx-auto my-5 text-center d-flex ' style={{textDecoration:"none"}} to="/account">
                                 <div className='d-flex' >
                                     <FiHardDrive className='mx-3 mt-1' style={{color:"gray",fontSize:"32px"}}/>
